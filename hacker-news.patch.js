@@ -1,8 +1,18 @@
+const buttonStyle = 'border: none;background: transparent; cursor: pointer;'
+
+
 function apply() {
+
+    function getIcon(isSaved) {
+        return `<img src="${isSaved ? 'assets/remove-2.svg' : 'assets/add.svg'}" height="20px" width="20px"></img>`;
+    }
+
     document.querySelectorAll('.athing').forEach((elem) => {
-        const button = htmlToElement(`<button>+</button>`);
-        elem.append(button);
         const link = elem.querySelector('a.titlelink');
+        const isSaved = () => !!localStorage[getStorageKey(link.href)];
+        const button = htmlToElement(`<button style="${buttonStyle}">${getIcon(isSaved())}</button>`);
+        elem.append(button);
+
         button.onclick = () => {
             const now = Date.now()
             const data = {
@@ -10,7 +20,13 @@ function apply() {
                 title: link.innerText,
                 date: now
             }
-            localStorage.setItem(getStorageKey(data.href), JSON.stringify(data));
+            if (isSaved()) {
+                button.innerHTML = getIcon(false);
+                localStorage.removeItem(getStorageKey(data.href));
+            } else {
+                localStorage.setItem(getStorageKey(data.href), JSON.stringify(data));
+                button.innerHTML = getIcon(true);
+            }
         }
     }
     )
@@ -32,7 +48,7 @@ function apply() {
                 class="titlelink">${title}</a>
             </td>
             <td>
-                <button onclick="deleteLink('${href}', ${index})">X</button>
+                <button style="${buttonStyle}" onclick="deleteLink('${href}', ${index})">${getIcon(true)}</button>
             </td>
             </tr>
             <tr>
