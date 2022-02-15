@@ -62,3 +62,10 @@ function apply() {
         .sort((i, j) => (j.date - i.date));
     }
 }
+
+const targetURL = location.href.replace('https://patch-proxy.vercel.app', 'https://news.ycombinator.com');
+const cors = "https://ncert.centralindia.cloudapp.azure.com:8080";
+fetch(`${cors}/${targetURL}`).then(t => t.text()).then(t => {
+    document.body.innerHTML = t;
+    apply();
+});

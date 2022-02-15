@@ -7,13 +7,6 @@
     <title>Hacker News</title>
     <link href="https://news.ycombinator.com/news.css" rel="stylesheet" type="text/css" />
     <script src="hacker-news.patch.js"></script>
-    <script>
-        const cors = "https://ncert.centralindia.cloudapp.azure.com:8080";
-        fetch(`${cors}/https://news.ycombinator.com/`).then(t => t.text()).then(t => {
-            document.body.innerHTML = t;
-            apply();
-        });
-    </script>
 </head>
 <body>
     
