@@ -90,7 +90,7 @@ function deleteLink(href, index) {
 }
 
 const targetURL = location.href.replace(location.origin, 'https://news.ycombinator.com');
-const cors = "https://ncert.centralindia.cloudapp.azure.com:8080";
+const cors = "https://cors-baba.fly.dev";
 fetch(`${cors}/${targetURL}`).then(t => t.text()).then(t => {
     document.body.innerHTML = t;
     apply();
