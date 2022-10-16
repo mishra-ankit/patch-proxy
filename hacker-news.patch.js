@@ -8,7 +8,7 @@ function apply() {
     }
 
     document.querySelectorAll('.athing').forEach((elem) => {
-        const link = elem.querySelector('a.titlelink');
+        const link = elem.querySelector('a');
         const isSaved = () => !!localStorage[getStorageKey(link.href)];
         const button = htmlToElement(`<button style="${buttonStyle}">${getIcon(isSaved())}</button>`);
         elem.append(button);
